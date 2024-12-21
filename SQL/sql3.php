@@ -35,9 +35,15 @@
 	} 
 	//echo "Connected successfully";
 	if(isset($_POST["submit"])){
-		$number = $_POST['number'];
-		$query = "SELECT bookname,authorname FROM books WHERE number = '$number'"; //Is this same with the level 2?
-		$result = mysqli_query($conn,$query);
+
+                $number = trim($_POST["number"]);
+                // Preparar una consulta segura con parámetros
+                $stmt = $conn->prepare("SELECT bookname,authorname FROM books WHERE number = ?");
+                $stmt->bind_param("i", $number); // 'i' indica que el parámetro es un string
+                // Ejecutar la consulta preparada
+                $stmt->execute();
+                // Obtener los resultados
+                $result = $stmt->get_result();
 
 		if (!$result) { //Check result
 		    $message  = 'Invalid query: ' . mysql_error() . "\n";
