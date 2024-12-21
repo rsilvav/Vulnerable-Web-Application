@@ -35,7 +35,6 @@
 	//echo "Connected successfully";
 	if(isset($_POST["submit"])){
                 $number = trim($_POST["number"]);
-                // Preparar una consulta segura con parámetros
                 $stmt = $conn->prepare("SELECT bookname,authorname FROM books WHERE number = ?");
                 $stmt->bind_param("i", $number); // 'i' indica que el parámetro es un string
                 // Ejecutar la consulta preparada
