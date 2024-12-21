@@ -24,6 +24,9 @@
     if(isset($_GET["username"])){
       if($_GET["username"] == "Admin" && $_GET["password"] == "ufoundmypassword")
         echo "WELLDONE";
+    } else {
+        // Mensaje o acción en caso de que las credenciales no coincidan
+        echo "INVALID CREDENTIALS";
     }
 
     ?>
